@@ -1,8 +1,7 @@
 {
     "name": "ShizoGames.Utilities",
-    "references": [
-        "GUID:4034bae8469585c4cb7cf85cd419dfb2"
-    ],
+    "rootNamespace": "",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

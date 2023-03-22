@@ -1,5 +1,5 @@
 ﻿using System;
-using ShizoGames.Extensions;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -28,7 +28,8 @@ namespace ShizoGames.Utilities
             
             var blockerRectTransform = blocker.AddComponent<RectTransform>();
             blockerRectTransform.SetParent(rootCanvas.transform, false);
-            blockerRectTransform.SetAnchor(AnchorPresets.StretchAll);
+            blockerRectTransform.anchorMin = new Vector2(0, 0);
+            blockerRectTransform.anchorMax = new Vector2(1, 1);
             blockerRectTransform.sizeDelta = Vector2.zero;
             
             var blockerCanvas = blocker.AddComponent<Canvas>();
@@ -43,12 +44,18 @@ namespace ShizoGames.Utilities
                 var components = parentCanvas.GetComponents<BaseRaycaster>();
                 for (var i = 0; i < components.Length; i++)
                 {
-                    blocker.GetOrAddComponent(components[i].GetType());
+                    if (!blocker.TryGetComponent(components[i].GetType(), out _))
+                    {
+                        blocker.AddComponent(components[i].GetType());
+                    }
                 }
             }
             else
             {
-                blocker.GetOrAddComponent<GraphicRaycaster>();
+                if (!blocker.TryGetComponent(out GraphicRaycaster _))
+                {
+                    blocker.AddComponent<GraphicRaycaster>();
+                }
             }
             
             var blockerImage = blocker.AddComponent<Image>();
@@ -57,7 +64,7 @@ namespace ShizoGames.Utilities
             {
                 if (colorTransitionTime > 0)
                 {
-                    blockerImage.FadeColorTo(color, colorTransitionTime);
+                    blockerImage.StartCoroutine(FadeColor(blockerImage, color, colorTransitionTime));
                 }
                 else
                 {
@@ -84,7 +91,7 @@ namespace ShizoGames.Utilities
             {
                 if (blocker.Object.TryGetComponent<Image>(out var image))
                 {
-                    image.FadeColorTo(Color.clear, colorTransitionTime);
+                    image.StartCoroutine(FadeColor(image, Color.clear, colorTransitionTime));
                     
                     Object.Destroy(blocker.Object, colorTransitionTime);
                 }
@@ -94,7 +101,24 @@ namespace ShizoGames.Utilities
                 Object.Destroy(blocker.Object);
             }
         }
+        
+        private static IEnumerator FadeColor(this Graphic graphic, Color targetColor, float duration)
+        {
+            var startColor = graphic.color;
+            var elapsedTime = 0f;
 
+            while (elapsedTime < duration)
+            {
+                var t = elapsedTime / duration;
+                graphic.color = Color.Lerp(startColor, targetColor, t);
+                elapsedTime += Time.unscaledDeltaTime;
+
+                yield return null;
+            }
+
+            graphic.color = targetColor;
+        }
+        
         /// <summary>
         /// Represents the UI blocker object.
         /// </summary>
