@@ -1,0 +1,21 @@
+﻿{
+  "name": "com.shizogames.utilities",
+  "version": "1.0.0",
+  "displayName": "Utilities",
+  "description": "Large set of useful utilities.",
+  "unity": "2019.3",
+  "documentationUrl": "",
+  "dependencies": {},
+  "optionalDependencies": {},
+  "keywords": [
+    "Shizo",
+    "ShizoGames",
+    "Utilities",
+    "Utils"
+  ],
+  "author": {
+    "name": "ShizoGames",
+    "email": "hoshiza78@gmail.com",
+    "url": "https://hoshiza.itch.io"
+  }
+}
