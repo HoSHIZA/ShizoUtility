@@ -72,8 +72,11 @@ namespace ShizoGames.Utilities
                 }
             }
             
-            var blockerButton = blocker.AddComponent<Button>();
-            blockerButton.onClick.AddListener(() => onClickBlocker?.Invoke());
+            if (onClickBlocker != null)
+            {
+                var blockerButton = blocker.AddComponent<Button>();
+                blockerButton.onClick.AddListener(onClickBlocker.Invoke);
+            }
             
             return new Blocker(blocker);
         }
