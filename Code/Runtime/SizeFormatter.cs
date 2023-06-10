@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace ShizoGames.Utilities
+namespace ShizoGames.ShizoUtility
 {
     /// <summary>
     /// Provides methods to format file sizes into human-readable strings with appropriate size suffixes.

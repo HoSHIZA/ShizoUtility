@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.PlayerLoop;
 
-namespace ShizoGames.Utilities
+namespace ShizoGames.ShizoUtility
 {
     /// <summary>
     /// A static class that allows registering and invoking update events for various update types.

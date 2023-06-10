@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ShizoGames.Utilities
+namespace ShizoGames.ShizoUtility
 {
     /// <summary>
     /// Provides utility functions for working with different number types.

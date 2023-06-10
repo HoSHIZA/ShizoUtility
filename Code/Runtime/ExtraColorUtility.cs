@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ShizoGames.Utilities
+namespace ShizoGames.ShizoUtility
 {
     /// <summary>
     /// A utility class for working with colors in Unity.

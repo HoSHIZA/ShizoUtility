@@ -1,7 +1,7 @@
 ﻿{
-  "name": "com.shizogames.utilities",
+  "name": "com.shizogames.shizo_utility",
   "version": "1.0.0",
-  "displayName": "Utilities",
+  "displayName": "Shizo Utility",
   "description": "Large set of useful utilities.",
   "unity": "2019.3",
   "documentationUrl": "",
@@ -10,11 +10,13 @@
   "keywords": [
     "Shizo",
     "ShizoGames",
+    "ShizoUtility",
     "Utilities",
+    "Utility",
     "Utils"
   ],
   "author": {
-    "name": "ShizoGames",
+    "name": "HoSHIZA",
     "email": "hoshiza78@gmail.com",
     "url": "https://github.com/HoSHIZA"
   }

@@ -1,4 +1,4 @@
-﻿namespace ShizoGames.Utilities
+﻿namespace ShizoGames.ShizoUtility
 {
     /// <summary>
     /// Provides utility methods for abbreviating numeric values.
