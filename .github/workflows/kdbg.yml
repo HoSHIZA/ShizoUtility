@@ -1,0 +1,48 @@
+name: KDebugger Ready
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  update_branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Delete Existing Branch
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git push origin --delete kdbg || echo "Branch 'kdbg' does not exist"
+
+      - name: Create Branch
+        run: |
+          git checkout -b kdbg
+
+      - name: Update Namespaces
+        run: |
+          find . -type f -name '*.cs' -exec sed -i 's/namespace ShizoGames/namespace KDebugger.Plugins.ShizoGames/g' {} +
+
+      - name: Replace Runtime Asmdef
+        run: |
+          find . -type f -name 'ShizoGames.*.Editor.asmdef' -exec bash -c 'mv "$0" "KDebugger.Plugins.Editor.Reference.asmref"' {} +
+          find . -type f -name 'KDebugger.Plugins.Editor.Reference.asmref' -exec bash -c 'echo "{\n    \"reference\": \"KDebugger.Plugins.Editor\"\n}" > "$0"' {} +
+
+      - name: Replace Editor Asmdef
+        run: |
+          find . -type f -name 'ShizoGames.*.asmdef' -exec bash -c 'mv "$0" "KDebugger.Plugins.Reference.asmref"' {} +
+          find . -type f -name 'KDebugger.Plugins.Reference.asmref' -exec bash -c 'echo "{ \"reference\": \"KDebugger.Plugins\" }" > "$0"' {} +
+
+      - name: Remove .asmdef.meta Files
+        run: |
+          find . -type f -name 'ShizoGames.*.asmdef.meta' -exec rm {} +
+
+      - name: Push Branch
+        run: |
+          git add .
+          git commit -m "KDebugger Ready"
+          git push origin kdbg
