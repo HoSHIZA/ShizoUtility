@@ -33,7 +33,7 @@ jobs:
 
       - name: Replace Runtime Asmdef
         run: |
-          find . -type f -name 'ShizoGames.*.asmdef' -execdir bash -c 'echo -e "{\r\n    \"reference\": \"KDebugger.Plugins\"\r\n}" > "{}" && mv "{}" "KDebugger.Plugins.Reference.asmref"' \;
+          find . -type f -name 'ShizoGames.*.asmdef' -not \( -name '*.Editor.asmdef' \) -execdir bash -c 'echo -e "{\r\n    \"reference\": \"KDebugger.Plugins\"\r\n}" > "{}" && mv "{}" "KDebugger.Plugins.Reference.asmref"' \;
 
       - name: Remove .asmdef.meta Files
         run: |
