@@ -25,7 +25,7 @@ jobs:
 
       - name: Update Namespaces
         run: |
-          find . -type f -name '*.cs' -exec sed -i 's/namespace ShizoGames/namespace KDebugger.Plugins.ShizoGames/g' {} +
+          find . -type f -name '*.cs' -exec sed -i 's/ShizoGames(?>[.;]| {)/KDebugger.Plugins.ShizoGames/g' {} +
 
       - name: Replace Editor Asmdef
         run: |
