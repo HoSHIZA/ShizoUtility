@@ -13,15 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Delete Existing Branch
+      - name: Checkout Branch
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          git push origin --delete kdbg || echo "Branch 'kdbg' does not exist"
+          git checkout kdbg || git checkout -b kdbg
 
-      - name: Create Branch
+      - name: Rebase from master
         run: |
-          git checkout -b kdbg
+          git fetch origin master
+          git rebase origin/master
 
       - name: Update Namespaces
         run: |
@@ -39,8 +40,11 @@ jobs:
         run: |
           find . -type f -name 'ShizoGames.*.asmdef.meta' -exec rm {} +
 
-      - name: Push Branch
+      - name: Commit Branch
         run: |
           git add .
           git commit -m "KDebugger Ready"
-          git push origin kdbg
+
+      - name: Push Branch
+        run: |
+          git push --force origin kdbg
