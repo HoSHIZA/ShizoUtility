@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ShizoGames.ShizoUtility
+namespace KDebugger.Plugins.ShizoGames.ShizoUtility
 {
     /// <summary>
     /// Utility class for monitoring changes in screen resolution and orientation.

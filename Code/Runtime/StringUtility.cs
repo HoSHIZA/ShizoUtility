@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace ShizoGames.ShizoUtility
+namespace KDebugger.Plugins.ShizoGames.ShizoUtility
 {
     public static class StringUtility
     {
