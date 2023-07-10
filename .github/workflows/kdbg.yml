@@ -31,14 +31,12 @@ jobs:
       - name: Replace Editor Asmdef
         run: |
           find . -type f -name 'ShizoGames.*.Editor.asmdef' -execdir bash -c 'echo -e "{\r\n    \"reference\": \"KDebugger.Plugins.Editor\"\r\n}" > "{}" && mv "{}" "KDebugger.Plugins.Editor.Reference.asmref"' \;
+          find . -type f -name 'ShizoGames.*.Editor.asmdef.meta' -execdir bash -c 'sed -i "s/^guid: .*$/guid: $(uuidgen | tr -d '-')/g" {} && mv "{}" "KDebugger.Plugins.Editor.Reference.asmref.meta"' \;
 
       - name: Replace Runtime Asmdef
         run: |
           find . -type f -name 'ShizoGames.*.asmdef' -not \( -name '*.Editor.asmdef' \) -execdir bash -c 'echo -e "{\r\n    \"reference\": \"KDebugger.Plugins\"\r\n}" > "{}" && mv "{}" "KDebugger.Plugins.Reference.asmref"' \;
-
-      - name: Remove .asmdef.meta Files
-        run: |
-          find . -type f -name 'ShizoGames.*.asmdef.meta' -exec rm {} +
+          find . -type f -name 'ShizoGames.*.asmdef.meta' -not \( -name '*.Editor.asmdef.meta' \) -execdir bash -c 'sed -i "s/^guid: .*$/guid: $(uuidgen | tr -d '-')/g" {} && mv "{}" "KDebugger.Plugins.Reference.asmref.meta"' \;
 
       - name: Commit Branch
         run: |
