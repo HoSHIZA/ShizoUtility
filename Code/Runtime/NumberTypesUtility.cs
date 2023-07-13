@@ -45,11 +45,42 @@ namespace ShizoGames.ShizoUtility
         };
         
         /// <summary>
+        /// Clamps the given value within the specified range.
+        /// </summary>
+        /// <param name="value">The value to be clamped.</param>
+        /// <param name="type">The type of value determining the range.</param>
+        /// <returns>The clamped value within the specified range.</returns>
+        public static double ClampInRange(double value, Type type)
+        {
+            if (!ValueRanges.ContainsKey(type)) return 0;
+            
+            var range = ValueRanges[type];
+
+            if (value < range.MinValue)
+            {
+                value = range.MinValue;
+            }
+            else if (value > range.MaxValue)
+            {
+                value = range.MaxValue;
+            }
+
+            return value;
+        }
+        
+        /// <summary>
         /// Determines if the specified type is a number type.
         /// </summary>
         /// <param name="type">The type to check.</param>
         /// <returns>True if the type is a number type; otherwise, false.</returns>
         public static bool IsNumber(Type type) => IsInteger(type) || IsDecimal(type);
+        
+        /// <summary>
+        /// Determines if the specified type is a number type.
+        /// </summary>
+        /// <typeparam name="T">The type to check.</typeparam>
+        /// <returns>True if the type is a number type; otherwise, false.</returns>
+        public static bool IsNumber<T>() => IsInteger<T>() || IsDecimal<T>();
         
         /// <summary>
         /// Determines if the specified type is an integer type.
@@ -59,11 +90,25 @@ namespace ShizoGames.ShizoUtility
         public static bool IsInteger(Type type) => Integer.Any(t => t == type);
         
         /// <summary>
+        /// Determines if the specified type is an integer type.
+        /// </summary>
+        /// <typeparam name="T">The type to check.</typeparam>
+        /// <returns>True if the type is an integer type; otherwise, false.</returns>
+        public static bool IsInteger<T>() => Integer.Any(t => t is T);
+        
+        /// <summary>
         /// Determines if the specified type is a decimal type.
         /// </summary>
         /// <param name="type">The type to check.</param>
         /// <returns>True if the type is a decimal type; otherwise, false.</returns>
         public static bool IsDecimal(Type type) => Decimal.Any(t => t == type);
+        
+        /// <summary>
+        /// Determines if the specified type is a decimal type.
+        /// </summary>
+        /// <typeparam name="T">The type to check.</typeparam>
+        /// <returns>True if the type is a decimal type; otherwise, false.</returns>
+        public static bool IsDecimal<T>() => Decimal.Any(t => t is T);
         
         /// <summary>
         /// A struct representing the minimum and maximum values for a number type.
