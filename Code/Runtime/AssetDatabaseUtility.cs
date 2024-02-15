@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using Object = UnityEngine.Object;
 
-namespace ShizoGames.ShizoUtility
+namespace KDebugger.Plugins.ShizoGames.ShizoUtility
 {
     /// <summary>
     /// A utility class for working with assets in Unity.

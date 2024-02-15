@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace ShizoGames.ShizoUtility
+namespace KDebugger.Plugins.ShizoGames.ShizoUtility
 {
     /// <summary>
     /// Provides methods to format file sizes into human-readable strings with appropriate size suffixes.

@@ -1,4 +1,4 @@
-﻿namespace ShizoGames.ShizoUtility
+﻿namespace KDebugger.Plugins.ShizoGames.ShizoUtility
 {
     /// <summary>
     /// Provides utility methods for abbreviating numeric values.
